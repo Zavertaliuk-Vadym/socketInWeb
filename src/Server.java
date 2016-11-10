@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 public class Server {
     public static void main(String args[]) throws IOException, URISyntaxException {
         run();
-
     }
 
     private static void run() throws IOException {
@@ -15,7 +14,7 @@ public class Server {
         while (true) {
             StringBuilder builder = new StringBuilder();
             Socket socket = server.accept();
-            Handler.fillingPage(builder, socket);
+            builder.append(Handler.fillingPage(socket));
             socket.getOutputStream().write(builder.toString().getBytes("UTF-8"));
         }
     }

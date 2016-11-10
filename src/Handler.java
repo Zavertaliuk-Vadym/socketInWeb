@@ -32,7 +32,8 @@ class Handler {
                     "</form>"
             ;
 
-    static String fillingPage(StringBuilder builder, Socket socket) throws IOException {
+    static String fillingPage(Socket socket) throws IOException {
+        StringBuilder builder = new StringBuilder();
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String parameters = reader.readLine().split(" ")[1];
         if (isContains(parameters, "/calendar")) {
