@@ -36,33 +36,31 @@ class Handler {
         StringBuilder builder = new StringBuilder();
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         String parameters = reader.readLine().split(" ")[1];
-        if (isContains(parameters, "/calendar")) {
-            builder.append(getPrint()).append(footer).append(migrationForm);
-        } else if (isContains(parameters, "/new")) {
-            builder.append(header);
-            if (isContains(parameters, "name")) {
-                builder.append("Hello").append(ParserUrl.parseUrl(parameters));
-                builder.append(migrationForm);
-            }
-            builder.append(footer);
-        } else if (isContains(parameters, "/hello_world")) {
-            builder.append(header);
-            builder.append(headerForHelloWorld);
-            builder.append(migrationForm);
-            builder.append(footer);
-        } else {
-            builder.append(header);
-            builder.append(migrationForm);
-            builder.append(footer);
-        }
+        getVariant(builder, parameters);
         return builder.toString();
     }
+
+    private static void getVariant(StringBuilder builder, String parameters) {
+        if (parameters.contains("/calendar")) {
+            builder.append(getPrint()).append(footer);
+        }
+        if (parameters.contains( "/new")) {
+            builder.append(header);
+            if (parameters.contains("name")) {
+                builder.append("Hello").append(ParserUrl.parseUrl(parameters)).append(migrationForm);
+            }
+            builder.append(footer);
+            return;
+        }
+        if (parameters.contains( "/hello_world")) {
+            builder.append(header).append(headerForHelloWorld).append(migrationForm).append(footer);
+        } else {
+            builder.append(header).append(migrationForm).append(footer);
+        }
+    }
+
     private static String getPrint() {
         Print calendar = new PrintInWeb();
         return calendar.print();
-    }
-
-    static boolean isContains(String parameters, String s) {
-        return parameters.contains(s);
     }
 }

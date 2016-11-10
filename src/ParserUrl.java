@@ -4,7 +4,7 @@ import java.net.URLDecoder;
 class ParserUrl {
     static String parseUrl(String parameters) {
         String name;
-        if (Handler.isContains(parameters, "name")) {
+        if (parameters.contains("name")) {
             name = ParserName.parseName(parameters).replace("+", " ");
             try {
                 name = URLDecoder.decode(name, "UTF-8");
