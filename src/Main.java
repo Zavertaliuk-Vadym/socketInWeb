@@ -6,14 +6,14 @@ import java.io.IOException;
 public class Main {
 
     static Router router ;
-    Parser parser = new ParserImpl();
     static Server server = new Server();
     public static void main(String[] args) throws IOException {
         setup();
-        server.run();
+        server.run(router);
     }
-    static void setup() {
+    private static void setup() {
         router = new RouterImp();
         router.register("/calendar?", CalendarHandler::new);
+        router.register("/hello_world?", GreeterHandler::new);
     }
 }
