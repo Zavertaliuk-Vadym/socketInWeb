@@ -5,10 +5,15 @@ import java.io.IOException;
  */
 public class Main {
 
-    Router router =  new RouterImp();
+    static Router router ;
     Parser parser = new ParserImpl();
     static Server server = new Server();
     public static void main(String[] args) throws IOException {
+        setup();
         server.run();
+    }
+    static void setup() {
+        router = new RouterImp();
+        router.register("/calendar?", CalendarHandler::new);
     }
 }

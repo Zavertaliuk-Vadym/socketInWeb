@@ -9,11 +9,19 @@ class Server {
         ServerSocket server = new ServerSocket(port);
         System.out.println("Listening for connection on port 8080 ....");
         while (true) {
-            StringBuilder builder = new StringBuilder();
             Socket socket = server.accept();
+            HttpRequest request = parser.parse(socket.getInputStream());
+            String handler = router.dispatch(request);
             parser.parse(socket.getInputStream());
-            socket.getOutputStream().write(builder.toString().getBytes("UTF-8"));
+            System.out.println("Server"+parser.parse(socket.getInputStream()));
+            socket.getOutputStream().write(handler.getBytes("UTF-8"));
         }
     }
+
+//    private void dispatchRequest(HttpRequest request) {
+//        String response = router.dispatch(request);
+////      send response back to socket
+//    }
+
 }
 
