@@ -12,6 +12,7 @@ class Server {
             HttpRequest request = parser.parse(socket.getInputStream());
             String response = router.dispatch(request);
             socket.getOutputStream().write(response.getBytes("UTF-8"));
+            socket.close();
         }
     }
 

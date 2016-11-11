@@ -21,7 +21,7 @@ public class GreeterHandler implements Handler {
 
 
     static String migrationForm =
-            "<form method=\"LINK\" action=\"http://greater.local:8080/calendar?name=1234\">\n" +
+            "<form method=\"LINK\" action=\"http://greater.local:8080/calendar?\">\n" +
                     "    <input type=\"submit\" value=\"Calendar\">\n" +
                     "</form>" +
                     "<form method=\"LINK\" action=\"http://greater.local:8080/hello_world\">\n" +
@@ -37,7 +37,11 @@ public class GreeterHandler implements Handler {
     public String print(HttpRequest httpRequest) {
         StringBuilder builder = new StringBuilder();
         builder.append(header);
-        builder.append("Hello "+httpRequest.getParam().get("name"));
+        if(httpRequest.getParam().size()==0){
+            builder.append("Hello world!");
+        }else {
+            builder.append("Hello " + httpRequest.getParam().get("name"));
+        }
         builder.append(migrationForm).append(footer);
         return builder.toString();
     }

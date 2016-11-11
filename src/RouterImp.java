@@ -15,11 +15,12 @@ class RouterImp implements Router {
         Handler handler;
 //        System.out.println("httpRequest.getPath()=" + httpRequest.getPath());
         try {
+//            System.out.println("OLOLO"+routes.get(httpRequest.getPath()).apply(httpRequest));
             handler = routes.get(httpRequest.getPath()).apply(httpRequest);
             return handler.print(httpRequest);
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            handler = new HomePageImlp(httpRequest);
         }
-        return null;
+        return handler.print(httpRequest);
     }
 }

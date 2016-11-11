@@ -19,21 +19,24 @@ public class CalendarHandler implements Handler {
     @Override
     public String print(HttpRequest httpRequest) {
         List<DayOfWeek> dayOfWeeks = new ArrayList<>();
-        System.out.println(httpRequest.getParam().get("day"));
-        System.out.println(httpRequest.getParam().get("month"));
-        System.out.println(httpRequest.getParam().get("year"));
-        System.out.println(httpRequest.getParam().get("dayOfWeek"));
-        String weekend = httpRequest.getParam().get("weekends");
-        List<DayOfWeek> weekList = add(weekend, dayOfWeeks);
         Print print = new PrintInWeb();
-        print.setToday(LocalDate.of(Integer.parseInt(httpRequest.getParam().get("year")), Integer.parseInt(httpRequest.getParam().get("month")), Integer.parseInt(httpRequest.getParam().get("day"))));
-        print.setDayOfWeek(DayOfWeek.of(Integer.parseInt(httpRequest.getParam().get("dayOfWeek"))));
-        print.setWeekends(weekList);
+        System.out.println("httpRequest in Calendar Hadler="+httpRequest.getParam().size());
+        if(httpRequest.getParam().size()>=1) {
+            System.out.println(httpRequest.getParam().get("day"));
+            System.out.println(httpRequest.getParam().get("month"));
+            System.out.println(httpRequest.getParam().get("year"));
+            System.out.println(httpRequest.getParam().get("dayOfWeek"));
+            String weekend = httpRequest.getParam().get("weekends");
+            List<DayOfWeek> weekList = add(weekend, dayOfWeeks);
+            print.setToday(LocalDate.of(Integer.parseInt(httpRequest.getParam().get("year")), Integer.parseInt(httpRequest.getParam().get("month")), Integer.parseInt(httpRequest.getParam().get("day"))));
+            print.setDayOfWeek(DayOfWeek.of(Integer.parseInt(httpRequest.getParam().get("dayOfWeek"))));
+            print.setWeekends(weekList);
+        }
         return print.print();
     }
 
     private static List<DayOfWeek> add(String s, List<DayOfWeek> dayOfWeeks) {
-        String[] numbersArray = s.split("[, ]");
+        String[] numbersArray = s.split("[ ,]");
         for (String number : numbersArray) {
             if (!number.trim().isEmpty()) {
                 DayOfWeek weekends = DayOfWeek.of(Integer.parseInt(number.trim()));

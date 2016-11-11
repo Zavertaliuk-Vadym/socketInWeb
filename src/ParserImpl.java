@@ -10,8 +10,9 @@ class ParserImpl implements Parser {
     @Override
     public HttpRequest parse(InputStream stream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        String parameters;
         try {
-            String parameters = reader.readLine().split(" ")[1];
+            parameters = reader.readLine().split(" ")[1];
             return new HttpRequest(getPath(parameters), getParameters(parameters));
         } catch (IOException e) {
             e.printStackTrace();
@@ -29,15 +30,17 @@ class ParserImpl implements Parser {
     Map<String, String> getParameters(String query) throws UnsupportedEncodingException {
         String string = query.substring(query.indexOf("?")+1);
         Map<String, String> query_pairs = new LinkedHashMap<>();
-        String[] pairs = string.split("&");
-        for (String pair : pairs) {
-            int idx = pair.indexOf("=");
-            query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"),
-                    URLDecoder.decode(pair.substring(idx + 1),
-                            "UTF-8"));
-        }
-        System.out.println("query_pairs"+query_pairs);
-        return query_pairs;
+            String[] pairs = string.split("&");
+            for (String pair : pairs) {
+                int idx = pair.indexOf("=");
+                try
+                {       query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"),
+                             URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+                }catch (Exception ignored){}
+            }
+            return query_pairs;
+//        }
+
     }
 
 
