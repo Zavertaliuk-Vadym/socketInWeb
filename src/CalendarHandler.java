@@ -11,6 +11,10 @@ import java.util.List;
  */
 public class CalendarHandler implements Handler {
     private HttpRequest request;
+    static String form =
+            "<form method=\"LINK\" action=\"http://greater.local:8080\">\n" +
+                    "    <input type=\"submit\" value=\"Home\">\n" +
+                    "</form>" ;
 
     public CalendarHandler(HttpRequest request) {
         this.request = request;
@@ -32,7 +36,7 @@ public class CalendarHandler implements Handler {
             print.setDayOfWeek(DayOfWeek.of(Integer.parseInt(httpRequest.getParam().get("dayOfWeek"))));
             print.setWeekends(weekList);
         }
-        return print.print();
+        return print.print()+form;
     }
 
     private static List<DayOfWeek> add(String s, List<DayOfWeek> dayOfWeeks) {
