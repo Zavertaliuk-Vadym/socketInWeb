@@ -41,6 +41,10 @@ class HttpRequest {
 //            name = getParam(parameters).replace("+", " ");
 //        if (parameters.contains("name")) {
 //    static String getPath(String parameters) {
+
+
+
+
     public String getParam() {
         return param;
     }

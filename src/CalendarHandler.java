@@ -1,3 +1,6 @@
+import print.Print;
+import print.PrintInWeb;
+
 /**
  * Created by employee on 11/11/16.
  */
@@ -8,18 +11,10 @@ public class CalendarHandler implements Handler {
         this.request = request;
     }
 
-
-    public String handle() {
-        return null;
-    }
-
-    @Override
-    public HttpRequest request() {
-        return null;
-    }
-
     @Override
     public String print(HttpRequest httpRequest) {
-        return "Hello";
+        System.out.println("IT's calendar=!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"+httpRequest);
+        Print print = new PrintInWeb();
+        return print.print();
     }
 }
