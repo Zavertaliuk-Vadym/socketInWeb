@@ -25,6 +25,7 @@ public class CalendarHandler implements Handler {
         List<DayOfWeek> dayOfWeeks = new ArrayList<>();
         Print print = new PrintInWeb();
         System.out.println("httpRequest in Calendar Hadler="+httpRequest.getParam().size());
+        System.out.println(httpRequest.getParam());
         if(httpRequest.getParam().size()>=1) {
             System.out.println(httpRequest.getParam().get("day"));
             System.out.println(httpRequest.getParam().get("month"));
@@ -36,7 +37,7 @@ public class CalendarHandler implements Handler {
             print.setDayOfWeek(DayOfWeek.of(Integer.parseInt(httpRequest.getParam().get("dayOfWeek"))));
             print.setWeekends(weekList);
         }
-        return print.print()+form;
+        return print.print();
     }
 
     private static List<DayOfWeek> add(String s, List<DayOfWeek> dayOfWeeks) {
