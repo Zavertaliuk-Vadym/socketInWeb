@@ -27,9 +27,11 @@ public class GreeterHandler implements Handler {
 
     @Override
     public String print(HttpRequest httpRequest) {
+        System.out.println("httpRequest in Calendar Hadler="+httpRequest.getParam().size());
+        System.out.println(httpRequest.getParam());
         StringBuilder builder = new StringBuilder();
         builder.append(header);
-        if(httpRequest.getParam().size()==0){
+        if(httpRequest.getParam().get("name").length()==0){
             builder.append("Hello world!");
         }else {
             builder.append("Hello " + httpRequest.getParam().get("name"));

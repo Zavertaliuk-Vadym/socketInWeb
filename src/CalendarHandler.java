@@ -37,6 +37,7 @@ public class CalendarHandler implements Handler {
             print.setDayOfWeek(DayOfWeek.of(Integer.parseInt(httpRequest.getParam().get("dayOfWeek"))));
             print.setWeekends(weekList);
         }
+//        print.setToday(LocalDate.of(Integer.parseInt(httpRequest.getParam().get("year")));
         return print.print();
     }
 

@@ -28,6 +28,7 @@ class ParserImpl implements Parser {
 
 
     Map<String, String> getParameters(String query) throws UnsupportedEncodingException {
+        System.out.println("qweqweqweqweqwe!!!!"+query);
         String string = query.substring(query.indexOf("?")+1);
         Map<String, String> query_pairs = new LinkedHashMap<>();
             String[] pairs = string.split("&");
